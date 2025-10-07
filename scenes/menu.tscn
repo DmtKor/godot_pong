@@ -1,0 +1,133 @@
+[gd_scene load_steps=9 format=3 uid="uid://dj4l8tli88mys"]
+
+[ext_resource type="Script" uid="uid://bdfce4tbmnm46" path="res://scripts/menu.gd" id="1_13sgg"]
+[ext_resource type="Texture2D" uid="uid://b1yc6jr1jbc2s" path="res://res/img/blue-with-stars.png" id="2_i6lef"]
+[ext_resource type="FontFile" uid="uid://paykj4yd2gsw" path="res://res/fonts/fibberish.ttf" id="3_70i5f"]
+[ext_resource type="Script" uid="uid://ciuk5meesu3f6" path="res://scripts/name_label.gd" id="4_mj5lg"]
+[ext_resource type="AudioStream" uid="uid://dlt51aqnin0o" path="res://res/sounds/pong.wav" id="5_ufwb2"]
+[ext_resource type="AudioStream" uid="uid://c760j4es2247o" path="res://res/sounds/click.wav" id="6_6cdou"]
+[ext_resource type="Texture2D" uid="uid://pg5mn56ecw38" path="res://res/img/settings.png" id="7_i42df"]
+[ext_resource type="Texture2D" uid="uid://03sdq1pl7yjq" path="res://res/img/settings1.png" id="8_7jp70"]
+
+[node name="Menu" type="CanvasLayer"]
+script = ExtResource("1_13sgg")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i6lef")
+
+[node name="NameLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.5
+offset_top = 101.22
+offset_right = 52.5
+offset_bottom = 154.22012
+grow_horizontal = 2
+mouse_filter = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_70i5f")
+theme_override_font_sizes/font_size = 60
+text = "Pong"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_mj5lg")
+
+[node name="SoundPlayer" type="AudioStreamPlayer" parent="NameLabel"]
+stream = ExtResource("5_ufwb2")
+
+[node name="PVPButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -69.0
+offset_right = 240.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_70i5f")
+theme_override_font_sizes/font_size = 40
+text = "Player against player"
+
+[node name="PVCButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = -14.0
+offset_right = 240.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_70i5f")
+theme_override_font_sizes/font_size = 40
+text = "Player against computer"
+
+[node name="ExitButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -210.0
+offset_top = 162.0
+offset_right = 240.0
+offset_bottom = 212.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_70i5f")
+theme_override_font_sizes/font_size = 40
+text = "Exit"
+
+[node name="CVCButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = 38.0
+offset_right = 228.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("3_70i5f")
+theme_override_font_sizes/font_size = 40
+text = "Computer against computer"
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_6cdou")
+
+[node name="SettingsButton" type="TextureButton" parent="."]
+offset_left = 530.0
+offset_top = 406.0
+offset_right = 570.0
+offset_bottom = 446.0
+texture_normal = ExtResource("7_i42df")
+texture_hover = ExtResource("8_7jp70")
+stretch_mode = 4
+
+[connection signal="mouse_entered" from="NameLabel" to="NameLabel" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="NameLabel" to="NameLabel" method="_on_mouse_exited"]
+[connection signal="pressed" from="PVPButton" to="." method="_on_pvp_button_pressed"]
+[connection signal="pressed" from="PVCButton" to="." method="_on_pvc_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CVCButton" to="." method="_on_cvc_button_pressed"]
+[connection signal="mouse_entered" from="SettingsButton" to="." method="_on_settings_button_mouse_entered"]
+[connection signal="mouse_exited" from="SettingsButton" to="." method="_on_settings_button_mouse_exited"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8dwasstwbju8"]
+
+[ext_resource type="PackedScene" uid="uid://dbmb2tyndly4n" path="res://scenes/platform.tscn" id="1_0cutk"]
+[ext_resource type="Script" uid="uid://ban3n1mk5c668" path="res://scripts/field.gd" id="1_srqns"]
+[ext_resource type="PackedScene" uid="uid://xhrbej3ty1jw" path="res://scenes/hud.tscn" id="2_6e7u2"]
+[ext_resource type="PackedScene" uid="uid://de78u6sepvyir" path="res://scenes/ball.tscn" id="4_vm625"]
+[ext_resource type="Texture2D" uid="uid://b1yc6jr1jbc2s" path="res://res/img/blue-with-stars.png" id="5_vm625"]
+
+[node name="Field" type="Node2D"]
+script = ExtResource("1_srqns")
+
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="BG"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_vm625")
+
+[node name="Platform1" parent="." instance=ExtResource("1_0cutk")]
+light_mask = 2
+visibility_layer = 2
+
+[node name="Platform2" parent="." instance=ExtResource("1_0cutk")]
+light_mask = 2
+visibility_layer = 2
+controller = "player2"
+
+[node name="HUD" parent="." instance=ExtResource("2_6e7u2")]
+
+[node name="Ball" parent="." instance=ExtResource("4_vm625")]
+light_mask = 2
+visibility_layer = 2
+
+[connection signal="play" from="HUD" to="." method="_on_hud_play"]
+[connection signal="stop" from="HUD" to="." method="_on_hud_stop"]
+[connection signal="hit" from="Ball" to="." method="_on_ball_hit"]
+[connection signal="platform_touch" from="Ball" to="." method="_on_ball_platform_touch"]

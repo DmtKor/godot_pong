@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://de78u6sepvyir"]
+
+[ext_resource type="Script" uid="uid://cnjbxc0onp45c" path="res://scripts/ball.gd" id="1_n5601"]
+[ext_resource type="Texture2D" uid="uid://c5x21qydwn2fu" path="res://res/img/ball_4.png" id="2_gchj4"]
+[ext_resource type="Texture2D" uid="uid://72s68y8f4dwm" path="res://res/img/ball_1.png" id="3_01kih"]
+[ext_resource type="Texture2D" uid="uid://dhjqu01di7hcg" path="res://res/img/ball_2.png" id="4_1iob0"]
+[ext_resource type="Texture2D" uid="uid://bd4ga5ybqlb3q" path="res://res/img/ball_3.png" id="5_0jqm0"]
+[ext_resource type="AudioStream" uid="uid://dnpxx0etmodgj" path="res://res/sounds/miss.wav" id="6_01kih"]
+[ext_resource type="AudioStream" uid="uid://dlt51aqnin0o" path="res://res/sounds/pong.wav" id="6_gchj4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nidkk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_gchj4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_01kih")
+}],
+"loop": true,
+"name": &"hit0",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_1iob0")
+}],
+"loop": true,
+"name": &"hit1",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_0jqm0")
+}],
+"loop": true,
+"name": &"spawn",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n5601"]
+radius = 32.0
+
+[node name="Ball" type="Area2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_n5601")
+metadata/_edit_group_ = true
+
+[node name="BallSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nidkk")
+animation = &"spawn"
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_n5601")
+
+[node name="PongPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_gchj4")
+
+[node name="MissPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_01kih")
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]

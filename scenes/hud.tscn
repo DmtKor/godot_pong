@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://xhrbej3ty1jw"]
+
+[ext_resource type="FontFile" uid="uid://paykj4yd2gsw" path="res://res/fonts/fibberish.ttf" id="1_37p78"]
+[ext_resource type="Script" uid="uid://yj60lhxl0mwb" path="res://scripts/hud.gd" id="1_64ctp"]
+[ext_resource type="AudioStream" uid="uid://c760j4es2247o" path="res://res/sounds/click.wav" id="3_8sq4i"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_8sq4i"]
+action = &"stop"
+pressed = true
+
+[sub_resource type="Shortcut" id="Shortcut_640wx"]
+events = [SubResource("InputEventAction_8sq4i")]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_64ctp")
+
+[node name="ScoreLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.0
+offset_top = 10.0
+offset_right = 42.0
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 25
+text = "Score: 0/0"
+
+[node name="StopButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -40.0
+offset_right = 25.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 25
+shortcut = SubResource("Shortcut_640wx")
+shortcut_in_tooltip = false
+text = "Stop"
+
+[node name="ExitButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -15.5
+offset_right = 69.0
+offset_bottom = 19.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 25
+text = "Exit"
+
+[node name="MenuButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -57.0
+offset_right = 69.0
+offset_bottom = -22.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_37p78")
+theme_override_font_sizes/font_size = 25
+text = "Menu"
+
+[node name="ClickPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_8sq4i")
+
+[connection signal="pressed" from="StopButton" to="." method="_on_stop_button_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
